@@ -1,12 +1,21 @@
 import React from "react";
+import QuestionItem from "./QuestionItem";
 
-function QuestionList() {
+export default function QuestionList({ questions, onDeleteQuestion, onUpdateQuestion }) {
+  if (!questions || questions.length === 0) {
+    return <p>No questions available.</p>;
+  }
+
   return (
-    <section>
-      <h1>Quiz Questions</h1>
-      <ul>{/* display QuestionItem components here after fetching */}</ul>
-    </section>
+    <ul className="QuestionList">
+      {questions.map((q) => (
+        <QuestionItem
+          key={q.id}
+          question={q}
+          onDeleteQuestion={onDeleteQuestion}
+          onUpdateQuestion={onUpdateQuestion}
+        />
+      ))}
+    </ul>
   );
 }
-
-export default QuestionList;
